@@ -7,7 +7,15 @@
 //fetch the API information using promises
 fetch('https://randomuser.me/api/?results=12&nat=US')
     .then(response => response.json())
-    .then(data => generateUserCards(data.results));
+    .then(data => generateUserCards(data.results))
+    .catch(error => {
+        const gallery = document.getElementById('gallery');
+        gallery.innerHTML = `<h2>Something went wrong</h2> <br> ${error}`
+        gallery.style.display = 'block';
+        gallery.style.color = 'red';
+    })
+
+//check to see if there are any errors. if there are then display error message
 
 
 //use API data to generate the user cards and then append them to the parent container
