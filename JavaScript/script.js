@@ -28,6 +28,7 @@ const generateUserCards = (users) => {
             </div>
         </div>
         `;
+        //add each card generated to empty array and then display each one on page
         cardArr.push(userCard)
         cardArr.forEach(item => {
             gallery.innerHTML += item;
