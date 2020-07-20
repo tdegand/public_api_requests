@@ -1,1 +1,0 @@
-//Uses jquery to build the modal
