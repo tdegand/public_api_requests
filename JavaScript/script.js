@@ -4,10 +4,12 @@
  * Documentation be found here: https://randomuser.me/documentation
  * */
 
-//fetch the API information using promises
+//fetch the API information using promises for card
 fetch('https://randomuser.me/api/?results=12&nat=US')
     .then(response => response.json())
-    .then(data => generateUserCards(data.results))
+    .then(data => generateUserInfo(data.results))
+    // .then(dataModal => generateModal(dataModal.results))
+    //check to see if there are any errors. if there are then display error message
     .catch(error => {
         const gallery = document.getElementById('gallery');
         gallery.innerHTML = `<h2>Something went wrong</h2> <br> ${error}`
@@ -15,11 +17,8 @@ fetch('https://randomuser.me/api/?results=12&nat=US')
         gallery.style.color = 'red';
     })
 
-//check to see if there are any errors. if there are then display error message
-
-
 //use API data to generate the user cards and then append them to the parent container
-const generateUserCards = (users) => {
+const generateUserInfo = (users) => {
     const gallery = document.getElementById('gallery');
     users.map(user => {
         const cardArr = [];
@@ -43,4 +42,12 @@ const generateUserCards = (users) => {
     })
 }
 
+//event listener for the modal to appear (calls modal function)
+const userCard = document.querySelector('.card');
+const returnData = data.results;
+userCard.map(item => {
+    userCard.addEventListener('click', (e) => {
+
+    })
+});
 
