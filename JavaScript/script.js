@@ -10,9 +10,10 @@ fetch('https://randomuser.me/api/?results=12&nat=US')
     .then(data => generateUserCards(data.results));
 
 
+//use API data to generate the user cards and then append them to the parent container
 const generateUserCards = (users) => {
+    const gallery = document.getElementById('gallery');
     users.map(user => {
-        console.log(user);
         const userCard = `
         <div class="card">
             <div class="card-img-container">
@@ -25,7 +26,8 @@ const generateUserCards = (users) => {
             </div>
         </div>
         `;
-        document.getElementById('gallery').innerHTML = userCard;
+        gallery.innerHTML = `${userCard}`;
+        console.log(userCard);
     });
 }
 
