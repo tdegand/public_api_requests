@@ -13,11 +13,13 @@ fetch('https://randomuser.me/api/?results=12&nat=US')
 //use API data to generate the user cards and then append them to the parent container
 const generateUserCards = (users) => {
     const gallery = document.getElementById('gallery');
+    console.log(users)
     users.map(user => {
+        const cardArr = [];
         const userCard = `
         <div class="card">
             <div class="card-img-container">
-                <img class="card-img" src="${user.picture.thumbnail}" alt="profile picture">
+                <img class="card-img" src="${user.picture.large}" alt="profile picture">
             </div>
             <div class="card-info-container">
                 <h3 id="name" class="card-name cap">${user.name.first} ${user.name.last}</h3>
@@ -26,9 +28,11 @@ const generateUserCards = (users) => {
             </div>
         </div>
         `;
-        gallery.innerHTML = `${userCard}`;
-        console.log(userCard);
-    });
+        cardArr.push(userCard)
+        cardArr.forEach(item => {
+            gallery.innerHTML += item;
+        })
+    })
 }
 
 
