@@ -20,6 +20,7 @@ fetch('https://randomuser.me/api/?results=12&nat=US')
 //use API data to generate the user cards and then append them to the parent container
 const generateUserInfo = (users) => {
     const gallery = document.getElementById('gallery');
+    console.log(users);
     users.map(user => {
         const cardArr = [];
         const userCard = `
@@ -39,15 +40,50 @@ const generateUserInfo = (users) => {
         cardArr.forEach(item => {
             gallery.innerHTML += item;
         })
+
+
+
+        const userCardButton = document.querySelectorAll('.card');
+        userCardButton.forEach(card => {
+            card.addEventListener('click', () => {
+                generateModal(user)
+            })
+        })
+
+
     })
 }
 
 //event listener for the modal to appear (calls modal function)
-const userCard = document.querySelector('.card');
-const returnData = data.results;
-userCard.map(item => {
-    userCard.addEventListener('click', (e) => {
 
+
+const generateModal = (user) => {
+    const modalBox = document.createElement('div');
+    modalBox.className = "modal-container";
+    const modal = `
+            <div class="modal">
+                <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+                <div class="modal-info-container">
+                    <img class="modal-img" src="${user.picture.large}" alt="profile picture">
+                    <h3 id="name" class="modal-name cap">${user.name.first} ${user.name.last}</h3>
+                    <p class="modal-text">${user.email}</p>
+                    <p class="modal-text cap">${user.location.city}</p>
+                    <hr>
+                    <p class="modal-text">${user.phone}</p>
+                    <p class="modal-text">${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state} ${user.location.postcode}</p>
+                    <p class="modal-text">Birthday: ${user.dob}</p>
+                </div>
+            </div>
+            <div class="modal-btn-container">
+                <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
+                <button type="button" id="modal-next" class="modal-next btn">Next</button>
+            </div>`
+    modalBox.innerHTML = modal;
+    document.body.prepend(modalBox);
+
+    modalBox.addEventListener('click', (e) => {
+        if (e.target === document.getElementById('modal-close-btn')) {
+            document.removeChild(modalBox);
+        }
     })
-});
-
+}
