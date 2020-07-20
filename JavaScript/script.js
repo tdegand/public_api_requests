@@ -1,7 +1,7 @@
-//This file handles all the API requests and building of the user tiles
-
 /**API for requesting Users
  * https://randomuser.me/api/?results=12&nat=US
+ * 
+ * Documentation be found here: https://randomuser.me/documentation
  * */
 
 //fetch the API information using promises
