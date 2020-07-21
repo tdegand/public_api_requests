@@ -7,11 +7,7 @@
 //fetch the API information using promises for card
 fetch('https://randomuser.me/api/?results=12&nat=US')
     .then(response => response.json())
-    .then(data => {
-        generateUserInfo(data.results),
-            nextPrev(data.results)
-
-    })
+    .then(data => generateUserInfo(data.results))
     //check to see if there are any errors. if there are then display error message
     .catch(error => {
         const gallery = document.getElementById('gallery');
@@ -114,30 +110,26 @@ const generateModal = (user) => {
 
     if (modalBox) {
         const nextPrevButton = document.querySelector('.modal-btn-container');
+        const next = document.getElementById('modal-next');
+        const prev = document.getElementById('modal-prev');
 
         nextPrevButton.addEventListener('click', (event) => {
             if (nextPrevButton.contains(event.target)) {
-                nextPrev(users[i], event.target);
+                if (event.target === next) {
+                    generateModal(users[i]);
+                    users[i] += 1;
+                    document.body.removeChild(modal);
+                } else if (event.target === prev) {
+                    users[i] -= 1;
+                    generateModal(users[i]);
+                    document.body.removeChild(modal);
+                }
             }
         })
     }
 }
 
 
-const next = document.getElementById('modal-next');
-const prev = document.getElementById('modal-prev');
-
-const nextPrev = (users, button) => {
-    if (button === next) {
-        users[i] += 1;
-        generateModal(users[i]);
-        document.body.removeChild(modal);
-    } else if (button === prev) {
-        users[i] -= 1;
-        generateModal(users[i]);
-        document.body.removeChild(modal);
-    }
-}
 
 
 
