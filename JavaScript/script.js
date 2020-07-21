@@ -107,6 +107,16 @@ const generateModal = (user) => {
             document.body.removeChild(modalBox);
         }
     })
+
+    if (modalBox) {
+        const nextPrevButton = document.querySelector('modal-btn-container');
+
+        nextPrevButton.addEventListener('click', (event) => {
+            if (nextPrevButton.contains(event.target)) {
+                nextPrev(event.target);
+            }
+        })
+    }
 }
 
 const next = document.getElementById('modal-next');
@@ -125,16 +135,7 @@ const nextPrev = (button) => {
 }
 
 
-const modal = document.querySelector('.modal-container');
-if (modal) {
-    const nextPrevButton = document.querySelector('modal-btn-container');
 
-    nextPrevButton.addEventListener('click', (event) => {
-        if (nextPrevButton.contains(event.target)) {
-            nextPrev(event.target);
-        }
-    })
-}
 
 
 
