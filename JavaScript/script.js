@@ -20,9 +20,9 @@ fetch('https://randomuser.me/api/?results=12&nat=US')
 //use API data to generate the user cards and then append them to the parent container
 const generateUserInfo = (users) => {
     const gallery = document.getElementById('gallery');
-    console.log(users);
+    // console.log(users);
+    const cardArr = [];
     users.map(user => {
-        const cardArr = [];
         const userCard = `
         <div class="card">
             <div class="card-img-container">
@@ -37,10 +37,9 @@ const generateUserInfo = (users) => {
         `;
         //add each card generated to empty array and then display each one on page
         cardArr.push(userCard)
-        cardArr.forEach(item => {
-            gallery.innerHTML += item;
-        })
-
+    })
+    cardArr.forEach(item => {
+        gallery.innerHTML += item;
     })
 
     /**
@@ -55,20 +54,6 @@ const generateUserInfo = (users) => {
                 generateModal(users[i])
             }
         });
-    }
-
-    const modal = document.querySelector('.modal-container');
-
-    if (document.body.firstChild == modal) {
-        const next = document.getElementById('modal-next');
-        const prev = document.getElementById('modal-prev');
-        const modal = document.querySelector('.modal-container');
-        next.addEventListener('click', (e) => {
-            i += 1;
-            generateModal(users[i]);
-            document.body.removeChild(modal);
-        })
-
     }
 
     //generate search bar
@@ -120,6 +105,33 @@ const generateModal = (user) => {
     modalBox.addEventListener('click', (e) => {
         if (e.target === closeButton || closeButton.contains(e.target)) {
             document.body.removeChild(modalBox);
+        }
+    })
+}
+
+const next = document.getElementById('modal-next');
+const prev = document.getElementById('modal-prev');
+
+const nextPrev = (button) => {
+    if (button === next) {
+        i += 1;
+        generateModal(users[i]);
+        document.body.removeChild(modal);
+    } else if (button === prev) {
+        i -= 1;
+        generateModal(users[i]);
+        document.body.removeChild(modal);
+    }
+}
+
+
+const modal = document.querySelector('.modal-container');
+if (modal) {
+    const nextPrevButton = document.querySelector('modal-btn-container');
+
+    nextPrevButton.addEventListener('click', (event) => {
+        if (nextPrevButton.contains(event.target)) {
+            nextPrev(event.target);
         }
     })
 }
