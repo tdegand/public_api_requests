@@ -16,7 +16,7 @@ html, body {
 body {
     font-family: "Nunito", sans-serif;
     text-align: center;
-    background: rgba(235, 235, 235, 0.9);
+    background-image: url(../assets/intersection.png);
 }
 
 header {
@@ -90,8 +90,9 @@ header h1 {
     background: rgba(245, 245, 245, 0.9);
     border-radius: 0.25em;
     border: 1px solid rgba(50, 50, 50, 0.3);
-    transition: .4s ease-out;
+    transition: .3s ease-out;
     overflow: hidden;
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, .5);
 }
 
 .card-img {
@@ -250,6 +251,7 @@ header h1 {
     .card:hover {
         background: rgba(255, 255, 255, 1);
         border: 1px solid rgba(50, 50, 50, 0.9);
+        box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, .5);
     }
 
     .card:hover .card-text {
