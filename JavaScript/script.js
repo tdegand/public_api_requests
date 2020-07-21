@@ -41,17 +41,15 @@ const generateUserInfo = (users) => {
             gallery.innerHTML += item;
         })
 
-
-
-        const userCardButton = document.querySelectorAll('.card');
-        userCardButton.forEach(card => {
-            card.addEventListener('click', () => {
-                generateModal(user)
-            })
-        })
-
-
     })
+    const userCardButton = document.querySelectorAll('.card');
+    for (let i = 0; i < userCardButton.length; i++) {
+        userCardButton[i].addEventListener('click', (e) => {
+            if (e.target === userCardButton[i]) {
+                generateModal(users[i])
+            }
+        });
+    }
 }
 
 //event listener for the modal to appear (calls modal function)
@@ -81,9 +79,12 @@ const generateModal = (user) => {
     modalBox.innerHTML = modal;
     document.body.prepend(modalBox);
 
+    const closeButton = document.getElementById('modal-close-btn')
     modalBox.addEventListener('click', (e) => {
-        if (e.target === document.getElementById('modal-close-btn')) {
+        if (e.target === closeButton) {
             document.removeChild(modalBox);
         }
     })
+
 }
+
