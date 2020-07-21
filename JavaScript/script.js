@@ -42,6 +42,12 @@ const generateUserInfo = (users) => {
         })
 
     })
+
+    /**
+     * Loops over each generated card 
+     * adds an event listener to each card
+     * if clicked it will generate the modal using the current user
+     */
     const userCardButton = document.querySelectorAll('.card');
     for (let i = 0; i < userCardButton.length; i++) {
         userCardButton[i].addEventListener('click', (e) => {
