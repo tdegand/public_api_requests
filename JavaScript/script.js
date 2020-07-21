@@ -108,6 +108,7 @@ const generateModal = (users, index) => {
     modalBox.addEventListener('click', (e) => {
         if (e.target === closeButton || closeButton.contains(e.target)) {
             document.body.removeChild(modalBox);
+            return;
         }
     })
 
@@ -124,8 +125,6 @@ const generateModal = (users, index) => {
             } else if (event.target === prev) {
                 generateModal(users, index - 1);
                 document.body.removeChild(modalBox);
-            } else if (event.target === next && user === user[11]) {
-                return;
             }
         }
     });
