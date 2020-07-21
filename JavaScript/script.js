@@ -45,7 +45,7 @@ const generateUserInfo = (users) => {
     const userCardButton = document.querySelectorAll('.card');
     for (let i = 0; i < userCardButton.length; i++) {
         userCardButton[i].addEventListener('click', (e) => {
-            if (e.target === userCardButton[i]) {
+            if (e.target === userCardButton[i] || userCardButton[i].contains(e.target)) {
                 generateModal(users[i])
             }
         });
@@ -56,8 +56,20 @@ const generateUserInfo = (users) => {
 
 
 const generateModal = (user) => {
+    //create modal parent container
     const modalBox = document.createElement('div');
     modalBox.className = "modal-container";
+    //reformat the DOB of users
+    const year = user.dob.date.substring(0, 4);
+    const month = user.dob.date.substring(5, 7);
+    const day = user.dob.date.substring(8, 10);
+
+    let date = `${month}-${day}-${year}`;
+
+    /**
+     * Generate modal content with selected user data
+     * append this modal content to the parent container
+     */
     const modal = `
             <div class="modal">
                 <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
@@ -69,7 +81,7 @@ const generateModal = (user) => {
                     <hr>
                     <p class="modal-text">${user.phone}</p>
                     <p class="modal-text">${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state} ${user.location.postcode}</p>
-                    <p class="modal-text">Birthday: ${user.dob}</p>
+                    <p class="modal-text">Birthday: ${date}</p>
                 </div>
             </div>
             <div class="modal-btn-container">
@@ -78,11 +90,12 @@ const generateModal = (user) => {
             </div>`
     modalBox.innerHTML = modal;
     document.body.prepend(modalBox);
-
+    //event listener that will close the modal upon click
     const closeButton = document.getElementById('modal-close-btn')
+    const buttonText = document.querySelector('#modal-close-btn strong')
     modalBox.addEventListener('click', (e) => {
-        if (e.target === closeButton) {
-            document.removeChild(modalBox);
+        if (e.target === closeButton || e.target === buttonText) {
+            document.body.removeChild(modalBox);
         }
     })
 
