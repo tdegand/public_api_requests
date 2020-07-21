@@ -116,8 +116,8 @@ const generateModal = (user) => {
         nextPrevButton.addEventListener('click', (event) => {
             if (nextPrevButton.contains(event.target)) {
                 if (event.target === next) {
-                    generateModal(users[i]);
                     users[i] += 1;
+                    generateModal(users[i]);
                     document.body.removeChild(modal);
                 } else if (event.target === prev) {
                     users[i] -= 1;
