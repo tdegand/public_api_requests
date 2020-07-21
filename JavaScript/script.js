@@ -53,18 +53,22 @@ const generateUserInfo = (users) => {
         userCardButton[i].addEventListener('click', (e) => {
             if (e.target === userCardButton[i] || userCardButton[i].contains(e.target)) {
                 generateModal(users[i])
-
-
-                const next = document.getElementById('modal-next');
-                const prev = document.getElementById('modal-prev');
-                const modal = document.querySelector('.modal-container');
-                next.addEventListener('click', (e) => {
-                    i += 1;
-                    generateModal(users[i]);
-                    document.body.removeChild(modal);
-                })
             }
         });
+    }
+
+    const modal = document.querySelector('.modal-container');
+
+    if (document.body.firstChild == modal) {
+        const next = document.getElementById('modal-next');
+        const prev = document.getElementById('modal-prev');
+        const modal = document.querySelector('.modal-container');
+        next.addEventListener('click', (e) => {
+            i += 1;
+            generateModal(users[i]);
+            document.body.removeChild(modal);
+        })
+
     }
 
     //generate search bar
