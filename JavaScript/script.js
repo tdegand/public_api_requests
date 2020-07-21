@@ -84,7 +84,7 @@ const generateModal = (user) => {
                     <hr>
                     <p class="modal-text">${user.phone}</p>
                     <p class="modal-text">${user.location.street.number} ${user.location.street.name}<br> ${user.location.city}, ${user.location.state}<br> ${user.location.postcode}</p>
-                    <p class="modal-text">Birthday: ${date}</p>
+                    <p class="modal-text">Birthdate: ${date}</p>
                 </div>
             </div>`
 
