@@ -58,9 +58,6 @@ const generateUserInfo = (users) => {
     }
 }
 
-//event listener for the modal to appear (calls modal function)
-
-
 const generateModal = (user) => {
     //create modal parent container
     const modalBox = document.createElement('div');
@@ -86,24 +83,19 @@ const generateModal = (user) => {
                     <p class="modal-text cap">${user.location.city}</p>
                     <hr>
                     <p class="modal-text">${user.phone}</p>
-                    <p class="modal-text">${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state} ${user.location.postcode}</p>
+                    <p class="modal-text">${user.location.street.number} ${user.location.street.name}<br> ${user.location.city}, ${user.location.state}<br> ${user.location.postcode}</p>
                     <p class="modal-text">Birthday: ${date}</p>
                 </div>
-            </div>
-            <div class="modal-btn-container">
-                <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
-                <button type="button" id="modal-next" class="modal-next btn">Next</button>
             </div>`
+
     modalBox.innerHTML = modal;
     document.body.prepend(modalBox);
     //event listener that will close the modal upon click
     const closeButton = document.getElementById('modal-close-btn')
-    const buttonText = document.querySelector('#modal-close-btn strong')
     modalBox.addEventListener('click', (e) => {
-        if (e.target === closeButton || e.target === buttonText) {
+        if (e.target === closeButton || closeButton.contains(e.target)) {
             document.body.removeChild(modalBox);
         }
     })
 
 }
-
