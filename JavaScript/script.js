@@ -20,7 +20,7 @@ fetch('https://randomuser.me/api/?results=12&nat=US')
 //use API data to generate the user cards and then append them to the parent container
 const generateUserInfo = (users) => {
     const gallery = document.getElementById('gallery');
-    // console.log(users);
+    console.log(users);
     users.map(user => {
         const cardArr = [];
         const userCard = `
@@ -53,9 +53,27 @@ const generateUserInfo = (users) => {
         userCardButton[i].addEventListener('click', (e) => {
             if (e.target === userCardButton[i] || userCardButton[i].contains(e.target)) {
                 generateModal(users[i])
+
+
+                const next = document.getElementById('modal-next');
+                const prev = document.getElementById('modal-prev');
+                const modal = document.querySelector('.modal-container');
+                next.addEventListener('click', (e) => {
+                    i += 1;
+                    generateModal(users[i]);
+                    document.body.removeChild(modal);
+                })
             }
         });
     }
+
+    //generate search bar
+    const formParent = document.querySelector('.search-container');
+    formParent.innerHTML = `
+    <form action="#" method="get">
+        <input type="search" id="search-input" class="search-input" placeholder="Search...">
+        <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
+    </form>`
 }
 
 const generateModal = (user) => {
@@ -86,8 +104,11 @@ const generateModal = (user) => {
                     <p class="modal-text">${user.location.street.number} ${user.location.street.name}<br> ${user.location.city}, ${user.location.state}<br> ${user.location.postcode}</p>
                     <p class="modal-text">Birthdate: ${date}</p>
                 </div>
+            </div>
+            <div class="modal-btn-container">
+                <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
+                <button type="button" id="modal-next" class="modal-next btn">Next</button>
             </div>`
-
     modalBox.innerHTML = modal;
     document.body.prepend(modalBox);
     //event listener that will close the modal upon click
@@ -97,5 +118,8 @@ const generateModal = (user) => {
             document.body.removeChild(modalBox);
         }
     })
-
 }
+
+
+
+
