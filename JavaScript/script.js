@@ -40,7 +40,6 @@ const generateUserInfo = (users) => {
     cardArr.forEach(item => {
         gallery.innerHTML += item;
     })
-
     /**
      * Loops over each generated card 
      * adds an event listener to each card
@@ -50,10 +49,12 @@ const generateUserInfo = (users) => {
     for (let i = 0; i < userCardButton.length; i++) {
         userCardButton[i].addEventListener('click', (e) => {
             if (e.target === userCardButton[i] || userCardButton[i].contains(e.target)) {
-                generateModal(users[i])
+                generateModal(users, i)
             }
         });
     }
+
+
 
     // //generate search bar
     // const formParent = document.querySelector('.search-container');
@@ -64,7 +65,10 @@ const generateUserInfo = (users) => {
     // </form>`
 }
 
-const generateModal = (user) => {
+const generateModal = (users, index) => {
+
+    const user = users[index];
+
     //create modal parent container
     const modalBox = document.createElement('div');
     modalBox.className = "modal-container";
@@ -92,11 +96,11 @@ const generateModal = (user) => {
                     <p class="modal-text">${user.location.street.number} ${user.location.street.name}<br> ${user.location.city}, ${user.location.state}<br> ${user.location.postcode}</p>
                     <p class="modal-text">Birthdate: ${date}</p>
                 </div>
+            </div>
+            <div class="modal-btn-container">
+                <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
+                <button type="button" id="modal-next" class="modal-next btn">Next</button>
             </div>`
-    // <div class="modal-btn-container">
-    //     <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
-    //     <button type="button" id="modal-next" class="modal-next btn">Next</button>
-    // </div>
     modalBox.innerHTML = modal;
     document.body.prepend(modalBox);
     //event listener that will close the modal upon click
@@ -106,7 +110,30 @@ const generateModal = (user) => {
             document.body.removeChild(modalBox);
         }
     })
+
+    //generate new modal of next user when clicked
+    const next = document.getElementById('modal-next');
+    const prev = document.getElementById('modal-prev');
+    const nextPrevButton = document.querySelector('.modal-btn-container');
+    const cards = document.querySelectorAll('card');
+    nextPrevButton.addEventListener('click', (event) => {
+        if (nextPrevButton.contains(event.target)) {
+            if (event.target === next) {
+                document.body.removeChild(modalBox);
+                generateModal(users, index + 1);
+            } else if (event.target === prev) {
+                generateModal(users, index - 1);
+                document.body.removeChild(modalBox);
+            } else if (event.target === next && user === user[11]) {
+                return;
+            }
+        }
+    });
 }
+
+
+
+
 
 
 
