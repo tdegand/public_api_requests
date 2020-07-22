@@ -19,7 +19,7 @@ fetch('https://randomuser.me/api/?results=12&nat=US')
 //use API data to generate the user cards and then append them to the parent container
 const generateUserInfo = (users) => {
     const gallery = document.getElementById('gallery');
-    // console.log(users);
+    console.log(users);
     const cardArr = [];
     users.map(user => {
         const userCard = `
@@ -72,6 +72,13 @@ const generateModal = (users, index) => {
     //create modal parent container
     const modalBox = document.createElement('div');
     modalBox.className = "modal-container";
+
+    if (user === users[0]) {
+        modalBox.classList.add('first');
+    } else if (user === users[11]) {
+        modalBox.classList.add('last');
+    }
+
     //reformat the DOB of users
     const year = user.dob.date.substring(0, 4);
     const month = user.dob.date.substring(5, 7);
@@ -116,7 +123,6 @@ const generateModal = (users, index) => {
     const next = document.getElementById('modal-next');
     const prev = document.getElementById('modal-prev');
     const nextPrevButton = document.querySelector('.modal-btn-container');
-    const cards = document.querySelectorAll('card');
     nextPrevButton.addEventListener('click', (event) => {
         if (nextPrevButton.contains(event.target)) {
             if (event.target === next) {
@@ -127,7 +133,13 @@ const generateModal = (users, index) => {
                 document.body.removeChild(modalBox);
             }
         }
+
     });
+    if (modalBox.classList.contains('first')) {
+        nextPrevButton.removeChild(prev)
+    } else if (modalBox.classList.contains('last')) {
+        nextPrevButton.removeChild(next)
+    }
 }
 
 
