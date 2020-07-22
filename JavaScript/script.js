@@ -1,6 +1,5 @@
 /**API for requesting Users
  * https://randomuser.me/api/?results=12&nat=US
- * @
  * Documentation be found here: https://randomuser.me/documentation
  * */
 
@@ -16,10 +15,14 @@ fetch('https://randomuser.me/api/?results=12&nat=US')
         gallery.style.color = 'red';
     })
 
-//use API data to generate the user cards and then append them to the parent container
+/**
+ * @function generateUserInfo uses the user information t0 generate and display the user cards
+ * search function is also stored in here usng jquery to filter the cards upon submisson
+ * When a user card is clicked it will generate a modal of that user
+ * @param {*API response of users} users 
+ */
 const generateUserInfo = (users) => {
     const gallery = document.getElementById('gallery');
-    console.log(users);
     const cardArr = [];
     users.map(user => {
         const userCard = `
@@ -55,14 +58,6 @@ const generateUserInfo = (users) => {
         });
     }
 
-    searchBar(users);
-}
-
-//generate search bar. (will clean up code comments as we go)
-const searchBar = (users) => {
-
-
-
     //generate search bar
     const formParent = document.querySelector('.search-container');
     formParent.innerHTML = `
@@ -70,8 +65,27 @@ const searchBar = (users) => {
         <input type="search" id="search-input" class="search-input" placeholder="Search...">
         <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
     </form>`
-}
 
+    const submit = document.getElementById('search-submit');
+
+    //use jquery to filter the search
+    //use Keyup after grading as its faster.
+
+    $(".search-input").on("keyup", function () {
+        const value = $(this).val().toLowerCase();
+        const para = $("p")
+        $('.card').filter(function () {
+            $(this).toggle($(this).not(para).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    // $(".search-submit").on("click", function () {
+    //     const value = $(".search-input").val().toLowerCase();
+    //     $('.card').filter(function () {
+    //         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    //     });
+    // });
+}
 
 /**
  * @function generateModal will generate the modal when a user card is clicked/function called
@@ -150,6 +164,8 @@ const generateModal = (users, index) => {
         }
 
     });
+    //if the first modal is present it removes the Prev button
+    //if Last modal is present it removes the next button
     if (modalBox.classList.contains('first')) {
         nextPrevButton.removeChild(prev)
     } else if (modalBox.classList.contains('last')) {
