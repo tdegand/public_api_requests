@@ -1,6 +1,6 @@
 /**API for requesting Users
  * https://randomuser.me/api/?results=12&nat=US
- * 
+ * @
  * Documentation be found here: https://randomuser.me/documentation
  * */
 
@@ -40,6 +40,7 @@ const generateUserInfo = (users) => {
     cardArr.forEach(item => {
         gallery.innerHTML += item;
     })
+
     /**
      * Loops over each generated card 
      * adds an event listener to each card
@@ -54,17 +55,31 @@ const generateUserInfo = (users) => {
         });
     }
 
-
-
-    // //generate search bar
-    // const formParent = document.querySelector('.search-container');
-    // formParent.innerHTML = `
-    // <form action="#" method="get">
-    //     <input type="search" id="search-input" class="search-input" placeholder="Search...">
-    //     <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
-    // </form>`
+    searchBar(users);
 }
 
+//generate search bar. (will clean up code comments as we go)
+const searchBar = (users) => {
+
+
+
+    //generate search bar
+    const formParent = document.querySelector('.search-container');
+    formParent.innerHTML = `
+    <form action="#" method="get">
+        <input type="search" id="search-input" class="search-input" placeholder="Search...">
+        <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
+    </form>`
+}
+
+
+/**
+ * @function generateModal will generate the modal when a user card is clicked/function called
+ * and it will allow you to cycle through each modal using the next and prev buttons
+ * 
+ * @param users is the APi user data passed into this function
+ * @param index is the index number of the returned users from the API data
+ */
 const generateModal = (users, index) => {
 
     const user = users[index];
