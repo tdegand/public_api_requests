@@ -16,7 +16,7 @@ fetch('https://randomuser.me/api/?results=12&nat=US')
     })
 
 /**
- * @function generateUserInfo uses the user information t0 generate and display the user cards
+ * @function generateUserInfo uses the user information to generate and display the user cards
  * search function is also stored in here usng jquery to filter the cards upon submisson
  * When a user card is clicked it will generate a modal of that user
  * @param {*API response of users} users 
@@ -66,8 +66,6 @@ const generateUserInfo = (users) => {
         <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
     </form>`
 
-    const submit = document.getElementById('search-submit');
-
     //use jquery to filter the search
     //use Keyup after grading as its faster and remove submit button.
 
@@ -112,7 +110,7 @@ const generateModal = (users, index) => {
     const month = user.dob.date.substring(5, 7);
     const day = user.dob.date.substring(8, 10);
 
-    let date = `${month}-${day}-${year}`;
+    let date = `${month}/${day}/${year}`;
 
     /**
      * Generate modal content with selected user data
