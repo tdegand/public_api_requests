@@ -69,22 +69,21 @@ const generateUserInfo = (users) => {
     const submit = document.getElementById('search-submit');
 
     //use jquery to filter the search
-    //use Keyup after grading as its faster.
+    //use Keyup after grading as its faster and remove submit button.
 
-    $(".search-input").on("keyup", function () {
-        const value = $(this).val().toLowerCase();
-        const para = $("p")
-        $('.card').filter(function () {
-            $(this).toggle($(this).not(para).text().toLowerCase().indexOf(value) > -1)
-        });
-    });
-
-    // $(".search-submit").on("click", function () {
-    //     const value = $(".search-input").val().toLowerCase();
-    //     $('.card').filter(function () {
-    //         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    // $(".search-input").on("keyup", function () {
+    //     const value = $(this).val().toLowerCase();
+    //     $('.card-name').filter(function () {
+    //         $(this).closest(".card").toggle($(this).text().toLowerCase().indexOf(value) > -1)
     //     });
     // });
+
+    $(".search-submit").on("click", function () {
+        const value = $(".search-input").val().toLowerCase();
+        $('.card-name').filter(function () {
+            $(this).closest(".card").toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
 }
 
 /**
