@@ -7,9 +7,7 @@ This is a mockkup of an Employee Directory that gets a response from the API and
 
 Style changes to be noted Here:
 
-Updated box shadows on cards and search elements that are generated.
+Updated box shoadows on cards that are generated to add hover styles.
 Updated the background with an image to give a bit more flair and not be so plain.
-updated Card colors to make them pop.
-updated hover styles on cards and search elements
 
 
