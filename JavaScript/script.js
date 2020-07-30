@@ -63,25 +63,17 @@ const generateUserInfo = (users) => {
     formParent.innerHTML = `
     <form action="#" method="get">
         <input type="search" id="search-input" class="search-input" placeholder="Search...">
-        <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
     </form>`
 
     //use jquery to filter the search
-    //use Keyup after grading as its faster and remove submit button.
 
-    // $(".search-input").on("keyup", function () {
-    //     const value = $(this).val().toLowerCase();
-    //     $('.card-name').filter(function () {
-    //         $(this).closest(".card").toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    //     });
-    // });
-
-    $(".search-submit").on("click", function () {
-        const value = $(".search-input").val().toLowerCase();
+    $(".search-input").on("keyup", function () {
+        const value = $(this).val().toLowerCase();
         $('.card-name').filter(function () {
             $(this).closest(".card").toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
+
 }
 
 /**
